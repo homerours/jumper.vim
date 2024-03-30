@@ -14,7 +14,7 @@ command! -nargs=+ Zf :edit `jumper -f ${__JUMPER_FILES} -n 1 '<args>'`
 
 " Fuzzy-finders, FZF required
 let s:jumper_files = 'jumper -f ${__JUMPER_FILES} -c -n 150'
-let s:jumper_folders = 'jumper -f ${__JUMPER_FOLDERS} -n 150'
+let s:jumper_folders = 'jumper -f ${__JUMPER_FOLDERS} -c -n 150'
 
 command! JumperFiles call fzf#run(fzf#wrap({'source': s:jumper_files, 'options': '--ansi --disabled --keep-right --bind "change:reload:sleep 0.05; ' .. s:jumper_files .. ' {q} || true"'}))
 command! JumperFolders call fzf#run(fzf#wrap({'source': s:jumper_folders, 'options': '--ansi --disabled --keep-right --bind "change:reload:sleep 0.05; ' .. s:jumper_folders .. ' {q} || true"', 'sink': 'FZF'}))
