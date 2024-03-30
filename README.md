@@ -17,6 +17,6 @@ Use `:Zf <query>` to open the file matching a given `<query>` or `:Z <query>` to
 The default bindings for fuzzy-finding are
 - `Ctrl-Y` : find folders.
 - `Ctrl-U` : find files.
-- <leader>fu : live grep files.
+- `<leader>fu` : live grep files.
 
 They can changed, using the functions `JumperFiles`, `JumperFolders` and `JumperFu`.
