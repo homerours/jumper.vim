@@ -1,12 +1,20 @@
 " Update database whenever a new file is opened
-function s:JumperUpdate()
+function s:JumperUpdate(weight)
     let l:filename = expand('%:p')
-	if stridx(l:filename, '/.git/') == -1
-		silent execute '!jumper -f ${__JUMPER_FILES} -a ' .. l:filename
-	endif
+    if stridx(l:filename, '/.git/') == -1
+        silent execute '!jumper -f ${__JUMPER_FILES} -w' .. a:weight .. ' -a ' .. l:filename
+    endif
 endfunction
 
-autocmd BufReadPre,BufNewFile *  call s:JumperUpdate() 
+" Update database whenever the file changes
+function s:JumperBufWrite()
+    if getbufinfo('%')[0].changed
+        call s:JumperUpdate(0.2)
+    endif
+endfunction
+
+autocmd BufReadPre,BufNewFile *  call s:JumperUpdate(1) 
+autocmd BufWritePre *  call s:JumperBufWrite() 
 
 " Jump
 command! -nargs=+ Z :cd `jumper -f ${__JUMPER_FOLDERS} -n 1 '<args>'`
@@ -20,8 +28,8 @@ command! JumperFiles call fzf#run(fzf#wrap({'source': s:jumper_files, 'options':
 command! JumperFolders call fzf#run(fzf#wrap({'source': s:jumper_folders, 'options': '--ansi --disabled --keep-right --bind "change:reload:sleep 0.05; ' .. s:jumper_folders .. ' {q} || true"', 'sink': 'FZF'}))
 
 function s:open_at_line(name)
-	let sp = split(a:name,':')
-	execute "edit +".sp[1]." ".sp[0]
+    let sp = split(a:name,':')
+    execute "edit +".sp[1]." ".sp[0]
 endfunction
 
 let s:jumper_rg = 'jumper -f ${__JUMPER_FILES} \"\" | xargs rg -i --column --line-number --color=always'
