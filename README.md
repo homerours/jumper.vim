@@ -19,9 +19,9 @@ The default bindings for fuzzy-finding are
 - `Ctrl-U` : find files.
 - `<leader>fu` : live grep files (`bat` and `ripgrep` required).
 
-They can changed, using the functions `JumperFiles`, `JumperFolders` and `JumperFu`, e.g.
+They can changed, using the functions `JumperFiles`, `JumperFolders` and `JumperFindInFiles`, e.g.
 ```vim
 nnoremap <C-u> :JumperFiles<CR>
 nnoremap <C-y> :JumperFolders<CR>
-nnoremap <leader>fu :JumperFu<CR>
+nnoremap <leader>fu :JumperFindInFiles<CR>
 ```

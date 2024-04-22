@@ -40,8 +40,8 @@ function s:open_at_line(name)
 endfunction
 
 let s:jumper_rg = 'jumper -f $__JUMPER_FILES \"\" | xargs rg -i --column --line-number --color=always'
-command! JumperFu call fzf#run(fzf#wrap({'options': '--ansi --disabled --query "" --bind "start:reload:sleep 0.1; '.. s:jumper_rg .. ' {q} || true" --bind "change:reload:sleep 0.1; ' .. s:jumper_rg .. ' {q} || true" --delimiter : --preview "bat --color=always {1} --highlight-line {2}" --preview-window "up,60%,border-bottom,+{2}+3/3,~3"', 'sink': function('s:open_at_line')}))
+command! JumperFindInFiles call fzf#run(fzf#wrap({'options': '--ansi --disabled --query "" --bind "start:reload:sleep 0.1; '.. s:jumper_rg .. ' {q} || true" --bind "change:reload:sleep 0.1; ' .. s:jumper_rg .. ' {q} || true" --delimiter : --preview "bat --color=always {1} --highlight-line {2}" --preview-window "up,60%,border-bottom,+{2}+3/3,~3"', 'sink': function('s:open_at_line')}))
 
 nnoremap <C-u> :JumperFiles<CR>
 nnoremap <C-y> :JumperFolders<CR>
-nnoremap <leader>fu :JumperFu<CR>
+nnoremap <leader>fu :JumperFindInFiles<CR>
