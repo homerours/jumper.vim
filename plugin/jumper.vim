@@ -1,3 +1,8 @@
+if exists("g:loaded_jumper_vim")
+  finish
+endif
+let g:loaded_jumper_vim = 1
+
 " Update database whenever a new file is opened
 function s:JumperUpdate(database_file, filename, weight)
     if stridx(a:filename, '/.git/') == -1
